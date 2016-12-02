@@ -14,6 +14,9 @@
     <dependency>
       <groupId>org.ow2.asm</groupId>
       <artifactId>asm</artifactId>
+<!--
+      <artifactId>asm-debug-all</artifactId>
+-->
       <version>5.1</version>
       <scope>compile</scope>
     </dependency>

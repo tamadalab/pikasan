@@ -44,7 +44,10 @@ public class MethodExtractor {
         try(InputStream in = jarfile.getInputStream(entry)){
             ClassReader reader = new ClassReader(in);
             return extractClassFile(reader);
+        } catch(Exception e){
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
+        return new Result[0];
     }
 
     private Result[] extractClassFile(ClassReader reader){
