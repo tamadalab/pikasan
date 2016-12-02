@@ -23,12 +23,13 @@ public class MethodExtractor {
     }
 
     private Results extractImpl(Results results, Path path) throws IOException{
-        JarFile file = new JarFile(path.toFile());
-        file.stream()
-        .filter(entry -> entry.getName().endsWith(".class"))
-        .map(entry -> extractEntry(file, entry))
-        .forEach(result -> results.add(result));
-        return results;
+        try(JarFile file = new JarFile(path.toFile())){
+            file.stream()
+            .filter(entry -> entry.getName().endsWith(".class"))
+            .map(entry -> extractEntry(file, entry))
+            .forEach(result -> results.add(result));
+            return results;
+        }
     }
 
     private Result[] extractEntry(JarFile jarfile, JarEntry entry){
@@ -40,9 +41,10 @@ public class MethodExtractor {
     }
 
     private Result[] extractEntryImpl(JarFile jarfile, JarEntry entry) throws IOException{
-        InputStream in = jarfile.getInputStream(entry);
-        ClassReader reader = new ClassReader(in);
-        return extractClassFile(reader);
+        try(InputStream in = jarfile.getInputStream(entry)){
+            ClassReader reader = new ClassReader(in);
+            return extractClassFile(reader);
+        }
     }
 
     private Result[] extractClassFile(ClassReader reader){
