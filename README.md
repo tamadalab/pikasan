@@ -7,7 +7,7 @@ jarファイル内の各クラスを走査し，それぞれのメソッド内�
 プログラムに jar ファイルを渡せば，結果を出力する．複数のjarファイルを指定しても良い．
 
 ```
-java pikasan-1.0-SNAPSHOT.jar [OPTIONS] <JARS...>
+$ java pikasan-1.0-SNAPSHOT.jar [OPTIONS] <JARS...>
 OPTIONS
     --help:  print this message and exit.
 JARS
@@ -24,3 +24,22 @@ JARS
 
 最初の２つの項目はどのメソッドなのかを特定するために利用する．
 ３つ目の項目は４項目目以降の数を表している．
+
+## コンパイル方法
+
+Maven を使ってコンパイルしてください．
+
+```
+$ ls
+README.md    pom.xml      src/
+$ mvn package
+// 実行結果は省略．
+$ ls
+README.md    pom.xml      src/      target/
+$ java -jar target/pikasan-1.0-SNAPSHOT.jar --help
+OPTIONS
+    --help:  print this message and exit.
+JARS
+    targets.
+```
+
